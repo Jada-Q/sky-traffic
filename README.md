@@ -1,36 +1,87 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Sky Traffic
 
-## Getting Started
+Live aircraft over your city's airspace, drawn as Canvas trails. Sister piece to [Tide Pixels](https://github.com/Jada-Q/tide-pixels) — same minimal editorial layer, same single-canvas RAF loop, different live signal.
 
-First, run the development server:
+<p align="center">
+  <img src="docs/preview/sky-traffic.png" width="92%" alt="Sky Traffic — Tokyo airspace at dawn" />
+</p>
+
+<p align="center"><em>Tokyo airspace, morning — yellow dots are climbing/descending around HND/NRT, white are cruising, faint trails fade over 30 s.</em></p>
+
+**Live**: [sky-traffic-2026-05-07.vercel.app](https://sky-traffic-2026-05-07.vercel.app)
+
+Open it in a browser tab, or set it as a Mac desktop wallpaper via [Plash](https://sindresorhus.com/plash) and watch real planes drift across your screen all day.
+
+---
+
+## Five cities
+
+| City | URL |
+|---|---|
+| Tokyo (default) | [`/`](https://sky-traffic-2026-05-07.vercel.app/) |
+| Osaka | [`/?c=osaka`](https://sky-traffic-2026-05-07.vercel.app/?c=osaka) |
+| New York | [`/?c=nyc`](https://sky-traffic-2026-05-07.vercel.app/?c=nyc) |
+| Hong Kong | [`/?c=hkg`](https://sky-traffic-2026-05-07.vercel.app/?c=hkg) |
+| Los Angeles | [`/?c=lax`](https://sky-traffic-2026-05-07.vercel.app/?c=lax) |
+
+Custom point: `/?lat=37.62&lng=-122.38&label=SFO&tz=America/Los_Angeles&radius=60`
+
+The bottom dot row (right side on mobile) lets you switch between cities live.
+
+---
+
+## What's actually computed
+
+- **Aircraft positions** — pulled every 30 s from a server-side proxy at `/api/states`. The proxy talks to [api.adsb.lol](https://api.adsb.lol) (community-run ADS-B aggregator) and translates the response back into the OpenSky Network state-vector shape, so the client parser is independent of the upstream provider.
+- **Trails** — each plane's last 30 s of positions are kept in memory, drawn as a polyline with exponentially fading alpha (`exp(-3 · age/30s)`). Points older than 30 s are pruned; planes not seen for 60 s are dropped.
+- **Plane color by altitude** — cruise (>9 km baro altitude) is white; climb / descend / lower altitudes are warm yellow; on-ground is muted blue-grey. A small radial glow under each dot.
+- **Sky color** — vertical gradient interpolated across 10 keyframes through the day (deep night → dawn → noon → dusk → night), in the city's local timezone. A warm horizon glow band fades in around dawn / dusk.
+- **Local Mercator projection** — centered on the chosen airport, scaled so the configured radius (50–70 km depending on city) fits the canvas with padding. A faint ring marks the radius; a 10 px crosshair marks the airport.
+- **Film grain** — sparse RGB noise per frame, just enough to break up the gradient.
+
+There is **no interactivity** by design — no hover, no click, no settings UI. Plash's "Browsing Mode" is off by default and that's exactly what the piece expects.
+
+### Why not OpenSky directly?
+
+This was the plan, but `opensky-network.org/api/states/all` blocks (returns `UND_ERR_CONNECT_TIMEOUT`) from every Vercel egress region tested (`iad1`, `fra1`). Anonymous access from cloud IPs appears policy-gated. adsb.lol is a community-run aggregator built on the same raw ADS-B feeders OpenSky uses — same data, no IP block. If you self-host and want to switch back, the parser shape in `app/api/states/route.ts` is OpenSky-compatible and there's a single fetch URL to swap.
+
+---
+
+## Tech stack
+
+- Next.js 16 (App Router, server components for `searchParams`)
+- Tailwind v4
+- Cormorant Garamond + Geist Mono (`next/font/google`)
+- Plain Canvas 2D + RAF — no animation library
+- Live data: [api.adsb.lol](https://api.adsb.lol), proxied through a Next.js Route Handler with 25 s in-memory cache + stale-on-error fallback
+
+---
+
+## Local dev
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
+pnpm install
 pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open <http://localhost:3000>.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```bash
+pnpm build  # production build
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+---
 
-## Learn More
+## Used as a desktop wallpaper
 
-To learn more about Next.js, take a look at the following resources:
+1. Install [Plash](https://apps.apple.com/app/plash/id1494023538) (free, Mac App Store).
+2. Plash menu bar → `Add Website…` → paste a city URL above.
+3. Keep `Browsing Mode` off — Sky Traffic has no required interaction; switching cities happens via Plash's website list (one entry per city).
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+For multi-display: assign different cities per monitor (Tokyo on one, NYC on another) — the difference in airspace density across timezones makes the screen feel alive.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+---
 
-## Deploy on Vercel
+## License
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+MIT — do whatever you want, but if you ship a paid product literally cloned from this, at least drop a thank-you somewhere.
