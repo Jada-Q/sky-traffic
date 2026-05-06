@@ -20,6 +20,7 @@ Open it in a browser tab, or set it as a Mac desktop wallpaper via [Plash](https
 |---|---|
 | Tokyo (default) | [`/`](https://sky-traffic-2026-05-07.vercel.app/) |
 | Osaka | [`/?c=osaka`](https://sky-traffic-2026-05-07.vercel.app/?c=osaka) |
+| Shanghai 上海 | [`/?c=shanghai`](https://sky-traffic-2026-05-07.vercel.app/?c=shanghai) |
 | New York | [`/?c=nyc`](https://sky-traffic-2026-05-07.vercel.app/?c=nyc) |
 | Hong Kong | [`/?c=hkg`](https://sky-traffic-2026-05-07.vercel.app/?c=hkg) |
 | Los Angeles | [`/?c=lax`](https://sky-traffic-2026-05-07.vercel.app/?c=lax) |

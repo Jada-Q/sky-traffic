@@ -24,6 +24,14 @@ export const PRESETS: Record<string, Airport> = {
     timezone: "Asia/Tokyo",
     radius_km: 50,
   },
+  shanghai: {
+    lat: 31.17,
+    lng: 121.57,
+    label: "SHANGHAI 上海",
+    code: "PVG / SHA",
+    timezone: "Asia/Shanghai",
+    radius_km: 50,
+  },
   nyc: {
     lat: 40.7128,
     lng: -74.006,
