@@ -18,10 +18,11 @@ export default async function Home({
   };
   const airport = resolveAirport(params);
   const activeKey = params.c?.toLowerCase() || (params.lat ? "" : "tokyo");
+  const showGround = pickString(raw.ground)?.toLowerCase() !== "hide";
 
   return (
     <main className="relative h-screen w-screen overflow-hidden">
-      <Scene airport={airport} />
+      <Scene airport={airport} showGround={showGround} />
       <CitySwitcher active={activeKey} />
     </main>
   );

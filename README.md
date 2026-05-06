@@ -26,7 +26,15 @@ Open it in a browser tab, or set it as a Mac desktop wallpaper via [Plash](https
 
 Custom point: `/?lat=37.62&lng=-122.38&label=SFO&tz=America/Los_Angeles&radius=60`
 
+**Hide ground traffic**: append `&ground=hide` to any URL. Aircraft on the ground (taxiing, parked, holding) normally show as muted blue-grey dots clustered around the airport. `ground=hide` filters them out so only airborne traffic renders — useful if the ground cluster feels crowded. The visible-aircraft count updates to match.
+
 The bottom dot row (right side on mobile) lets you switch between cities live.
+
+### Plane colors
+
+- **white** — cruise (baro altitude > 9 km)
+- **yellow** — climbing or descending (typical for traffic near airports)
+- **muted blue-grey** — on the ground (taxi / parked / holding short)
 
 ---
 

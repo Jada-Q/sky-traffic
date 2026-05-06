@@ -24,9 +24,11 @@ interface PlaneTrack {
 
 export default function SkyCanvas({
   airport,
+  showGround = true,
   onCountChange,
 }: {
   airport: Airport;
+  showGround?: boolean;
   onCountChange?: (n: number) => void;
 }) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
@@ -79,7 +81,10 @@ export default function SkyCanvas({
             .slice(-TRAIL_MAX_POINTS);
         }
 
-        onCountChange?.(seen.size);
+        const visibleCount = showGround
+          ? seen.size
+          : aircraft.filter((a) => !a.onGround).length;
+        onCountChange?.(visibleCount);
         force((n) => (n + 1) % 1000);
       } catch (e) {
         if ((e as Error).name === "AbortError") return;
@@ -96,7 +101,7 @@ export default function SkyCanvas({
       ctrl.abort();
       clearInterval(id);
     };
-  }, [airport.lat, airport.lng, airport.radius_km, onCountChange]);
+  }, [airport.lat, airport.lng, airport.radius_km, showGround, onCountChange]);
 
   // Reset tracks when airport changes.
   useEffect(() => {
@@ -147,9 +152,11 @@ export default function SkyCanvas({
       const now = Date.now();
       const tracks = tracksRef.current;
       for (const track of tracks.values()) {
+        if (!showGround && track.current.onGround) continue;
         drawTrail(ctx, track, proj, now);
       }
       for (const track of tracks.values()) {
+        if (!showGround && track.current.onGround) continue;
         drawPlane(ctx, track, proj);
       }
 
@@ -164,7 +171,7 @@ export default function SkyCanvas({
       cancelAnimationFrame(rafRef.current);
       window.removeEventListener("resize", resize);
     };
-  }, [airport]);
+  }, [airport, showGround]);
 
   return (
     <canvas
