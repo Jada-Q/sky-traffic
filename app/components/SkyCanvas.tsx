@@ -241,6 +241,18 @@ function drawAirportMark(
   ctx.moveTo(x, y - 5);
   ctx.lineTo(x, y + 5);
   ctx.stroke();
+
+  // IATA code label below the crosshair.
+  if (airport.code) {
+    ctx.fillStyle = "rgba(255,255,255,0.55)";
+    ctx.font =
+      '11px ui-monospace, SFMono-Regular, "SF Mono", Menlo, monospace';
+    ctx.textAlign = "center";
+    ctx.textBaseline = "top";
+    ctx.fillText(airport.code, x, y + 9);
+    ctx.textAlign = "start";
+    ctx.textBaseline = "alphabetic";
+  }
 }
 
 function altitudeColor(alt: number | null, onGround: boolean): string {
