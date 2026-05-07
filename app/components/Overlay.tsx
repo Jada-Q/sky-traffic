@@ -68,6 +68,14 @@ export default function Overlay({
         <div className="mt-1 text-[11px] opacity-50">
           data: adsb.lol · {airport.radius_km} km radius
         </div>
+        {count === 0 && (
+          <div className="mt-1.5 max-w-[240px] text-[10px] italic leading-tight opacity-40">
+            No aircraft visible — region may have sparse ADS-B feeder
+            coverage. China mainland airspace is largely uncovered by
+            community ADS-B receivers; international flights crossing
+            overhead may still appear.
+          </div>
+        )}
       </div>
 
       <div className="absolute bottom-10 right-10 hidden max-w-[260px] text-right font-serif text-xs italic opacity-50 md:block">

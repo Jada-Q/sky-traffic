@@ -20,7 +20,7 @@ Open it in a browser tab, or set it as a Mac desktop wallpaper via [Plash](https
 |---|---|
 | Tokyo (default) | [`/`](https://sky-traffic-2026-05-07.vercel.app/) |
 | Osaka | [`/?c=osaka`](https://sky-traffic-2026-05-07.vercel.app/?c=osaka) |
-| Shanghai 上海 | [`/?c=shanghai`](https://sky-traffic-2026-05-07.vercel.app/?c=shanghai) |
+| Shanghai 上海 | [`/?c=shanghai`](https://sky-traffic-2026-05-07.vercel.app/?c=shanghai) (see note) |
 | New York | [`/?c=nyc`](https://sky-traffic-2026-05-07.vercel.app/?c=nyc) |
 | Hong Kong | [`/?c=hkg`](https://sky-traffic-2026-05-07.vercel.app/?c=hkg) |
 | Los Angeles | [`/?c=lax`](https://sky-traffic-2026-05-07.vercel.app/?c=lax) |
@@ -30,6 +30,10 @@ Custom point: `/?lat=37.62&lng=-122.38&label=SFO&tz=America/Los_Angeles&radius=6
 **Hide ground traffic**: append `&ground=hide` to any URL. Aircraft on the ground (taxiing, parked, holding) normally show as muted blue-grey dots clustered around the airport. `ground=hide` filters them out so only airborne traffic renders — useful if the ground cluster feels crowded. The visible-aircraft count updates to match.
 
 The bottom dot row (right side on mobile) lets you switch between cities live.
+
+### Note on China mainland coverage
+
+ADS-B aggregators (adsb.lol, OpenSky, FlightRadar24) depend on community-volunteer "feeders" running antennas. Mainland China has very few public feeders, so the live data layer is **largely empty over Shanghai, Beijing, Guangzhou, Chengdu, etc.** The Shanghai preset is included on purpose — international flights crossing overhead occasionally appear, and the empty bowl itself is honest signal about how distributed open data ecosystems work. The UI shows a muted hint when the bowl reads zero. Hong Kong, just outside that gap, has ample feeder coverage and works normally.
 
 ### Plane colors
 
