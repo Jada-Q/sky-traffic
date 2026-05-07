@@ -47,6 +47,9 @@ export default function Overlay({
           {airport.label} · {formatCoord(airport.lat, true)}{" "}
           {formatCoord(airport.lng, false)}
         </div>
+        <div className="mt-3 whitespace-nowrap text-[11px] italic opacity-45">
+          — also Tide Pixels · Bay Ships · Subway Pulse
+        </div>
       </div>
 
       <div className="absolute right-6 top-6 text-right font-serif md:right-10 md:top-10">

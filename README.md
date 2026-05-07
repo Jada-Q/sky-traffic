@@ -97,6 +97,14 @@ For multi-display: assign different cities per monitor (Tokyo on one, NYC on ano
 
 ---
 
+## Elsewhere
+
+- [Tide Pixels](https://github.com/Jada-Q/tide-pixels) — real-time ocean canvas (sky color, sun/moon, tide, lunar phase)
+- [Bay Ships](https://github.com/Jada-Q/bay-ships) — ship lanes through major harbors (procedural demo)
+- [Subway Pulse](https://github.com/Jada-Q/subway-pulse) — Tokyo metro lines as Beck-style abstract diagram (procedural demo)
+
+---
+
 ## License
 
 MIT — do whatever you want, but if you ship a paid product literally cloned from this, at least drop a thank-you somewhere.
