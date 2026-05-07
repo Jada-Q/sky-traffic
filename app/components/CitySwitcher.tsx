@@ -3,7 +3,7 @@
 const CITIES: Array<{ key: string; label: string }> = [
   { key: "tokyo", label: "Tokyo" },
   { key: "osaka", label: "Osaka" },
-  { key: "shanghai", label: "上海 Shanghai" },
+  { key: "shanghai", label: "Shanghai" },
   { key: "hkg", label: "Hong Kong" },
   { key: "nyc", label: "New York" },
   { key: "lax", label: "Los Angeles" },
