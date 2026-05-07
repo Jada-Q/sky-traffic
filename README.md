@@ -3,10 +3,12 @@
 Live aircraft over your city's airspace, drawn as Canvas trails. Sister piece to [Tide Pixels](https://github.com/Jada-Q/tide-pixels) — same minimal editorial layer, same single-canvas RAF loop, different live signal.
 
 <p align="center">
-  <img src="docs/preview/sky-traffic.png" width="92%" alt="Sky Traffic — Tokyo airspace at dawn" />
+  <img src="docs/preview/tokyo.png" width="32%" alt="Tokyo HND/NRT — morning" />
+  <img src="docs/preview/lax.png"   width="32%" alt="Los Angeles LAX — dusk" />
+  <img src="docs/preview/nyc.png"   width="32%" alt="New York JFK/LGA/EWR — night" />
 </p>
 
-<p align="center"><em>Tokyo airspace, morning — yellow dots are climbing/descending around HND/NRT, white are cruising, faint trails fade over 30 s.</em></p>
+<p align="center"><em>Same instant, three coastlines — Tokyo morning over HND/NRT · Los Angeles dusk over LAX · New York night over JFK/LGA/EWR. Yellow = climbing/descending, white = cruise, faint blue-grey clusters at airports = aircraft on the ground.</em></p>
 
 **Live**: [sky-traffic-2026-05-07.vercel.app](https://sky-traffic-2026-05-07.vercel.app)
 
