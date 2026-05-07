@@ -48,7 +48,7 @@ export default function Overlay({
           {formatCoord(airport.lng, false)}
         </div>
         <div className="mt-3 whitespace-nowrap text-[11px] italic opacity-45">
-          — also Tide Pixels · Bay Ships · Subway Pulse
+          — also Tide Pixels · Bay Ships · Subway Pulse · Quake Globe
         </div>
       </div>
 
