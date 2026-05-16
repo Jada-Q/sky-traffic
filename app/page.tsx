@@ -1,5 +1,6 @@
 import Scene from "./components/Scene";
 import CitySwitcher from "./components/CitySwitcher";
+import EchoSprite from "./components/EchoSprite";
 import { resolveAirport, type UrlParams } from "@/lib/airports";
 
 export default async function Home({
@@ -24,6 +25,7 @@ export default async function Home({
     <main className="relative h-screen w-screen overflow-hidden">
       <Scene airport={airport} showGround={showGround} />
       <CitySwitcher active={activeKey} />
+      <EchoSprite />
     </main>
   );
 }
